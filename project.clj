@@ -4,7 +4,6 @@
 
   :dependencies
   [[org.clojure/clojure "1.10.0"]
-   [compojure "1.6.1"]
    [ring "1.7.1"]]
 
   :main ^:skip-aot routing.core
@@ -14,4 +13,6 @@
   {:uberjar
    {:aot :all}
    :dev
-   {:source-paths ["dev"]}})
+   {:dependencies [[javax.servlet/servlet-api "2.5"]
+                   [org.clojure/tools.namespace "0.2.11"]]
+    :source-paths ["dev"]}})
