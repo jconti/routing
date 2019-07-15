@@ -8,7 +8,7 @@
   [config]
   ; jetty web server with a handler for all requests
   (let [web-server (jetty/run-jetty
-                    routes/app
+                    routes/handler
                     {:port 8080 :join? false})]
     (reset! global/state web-server)))
 
