@@ -4,7 +4,9 @@
 
   :dependencies
   [[org.clojure/clojure "1.10.0"]
-   [ring "1.7.1"]]
+   [compojure "1.6.1"]
+   [ring "1.7.1"]
+   [cheshire "5.8.1"]]
 
   :main ^:skip-aot routing.core
   :target-path "target/%s"
@@ -14,5 +16,6 @@
    {:aot :all}
    :dev
    {:dependencies [[javax.servlet/servlet-api "2.5"]
-                   [org.clojure/tools.namespace "0.2.11"]]
+                   [org.clojure/tools.namespace "0.2.11"]
+                   [clj-http "3.9.1"]]
     :source-paths ["dev"]}})
