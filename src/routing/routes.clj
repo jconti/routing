@@ -2,8 +2,7 @@
   (:require
    [cheshire.core :as json]
    [clojure.pprint :as pp]
-   [compojure.core :refer :all]
-   [compojure.route :as route]
+   [reitit.ring :as r]
    [ring.util.request :as ring-request]))
 
 (defn hello-world
@@ -12,7 +11,7 @@
 
 (defn echo
   [req]
-  {:status 200 :body req})
+  {:status 200 :body (dissoc req :reitit.core/router :reitit.core/match)})
 
 (defn wrap-req-body
   [handler]
@@ -29,9 +28,12 @@
         (update resp :body json/generate-string)
         resp))))
 
-(defroutes app
-  (GET "/" [] hello-world)
-  (GET "/echo" [] echo)
-  (route/not-found "<h1>Page not found</h1>"))
+(def app
+  (r/ring-handler
+   (r/router
+    [["/" {:get hello-world}]
+     ["/echo" {:get echo}]]
+    {:data {:middleware [wrap-req-body wrap-json]}})
+   (constantly {:status 404 :body "Ouch!"})))
 
-(def handler (-> app wrap-json wrap-req-body))
+(def handler app)

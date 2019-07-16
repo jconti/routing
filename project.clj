@@ -4,7 +4,7 @@
 
   :dependencies
   [[org.clojure/clojure "1.10.0"]
-   [compojure "1.6.1"]
+   [metosin/reitit-ring "0.3.7"]
    [ring "1.7.1"]
    [cheshire "5.8.1"]]
 
